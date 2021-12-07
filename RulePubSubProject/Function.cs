@@ -42,12 +42,10 @@ namespace RulePubSubProject
                 if (string.IsNullOrEmpty(authKey))
                 {
                     response.StatusCode = StatusCodes.Status401Unauthorized;
-                    topicMessage = "";
                 }
                 else if (!string.Equals(request.Form[_myKey],_myKeyValue))
                 {
                     response.StatusCode = StatusCodes.Status401Unauthorized;
-                    topicMessage = "";
                 }
                 else
                 {
@@ -59,7 +57,6 @@ namespace RulePubSubProject
 
                     _logger.LogInformation("publishing message to topic...");
                     await _pubSubService.SendMessageAsync(_topicName, topicMessage);
-
                     response.StatusCode = StatusCodes.Status200OK;
                 }
             }
