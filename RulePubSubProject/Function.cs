@@ -9,16 +9,21 @@ using System.Threading.Tasks;
 
 namespace RulePubSubProject
 {
+    [FunctionsStartup(typeof(Startup))]
     public class Function : IHttpFunction
     {
         private readonly string _topicName = "projects/geotab-soleng/topics/BrettTest";
         private readonly string _myKey = "keyItem";
         private readonly string _myKeyValue = "KeyValue";
         private readonly ILogger _logger;
+        private readonly PubSubService _pubSubService;
 
-        public Function(ILogger<Function> logger)
+        public Function(
+            ILogger<Function> logger,
+            PubSubService pubSubService)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _pubSubService = pubSubService;
         }
 
         public async Task HandleAsync(HttpContext context)
@@ -49,17 +54,18 @@ namespace RulePubSubProject
                     foreach (string key in request.Form.Keys)
                     {
                         topicMessage += $"key: {key}, value: {request.Form[key]}\n";
-                        _logger.LogInformation(topicMessage);
+                        _logger.LogDebug(topicMessage);
                     }
+
+                    _logger.LogInformation("publishing message to topic...");
+                    await _pubSubService.SendMessageAsync(_topicName, topicMessage);
+
                     response.StatusCode = StatusCodes.Status200OK;
                 }
             }
-            //_logger.LogInformation("publishing message to topic...");
-            //await _pubSub.SendMessageAsync(topicName, message);
-
+            
             _logger.LogInformation("finishing execution...");
 
-            //await context.Response.WriteAsync($"{responseMessage}");
             await response.WriteAsync($"{topicMessage}");
         }
     }
