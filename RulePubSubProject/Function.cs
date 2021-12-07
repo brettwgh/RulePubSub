@@ -24,33 +24,34 @@ namespace RulePubSubProject
         public async Task HandleAsync(HttpContext context)
         {
             _logger.LogInformation("starting execution...");
+
             // get the request object
             HttpRequest request = context.Request;
+            // get the response object
             HttpResponse response = context.Response;
 
-            _logger.LogInformation($"ContentType: {request.ContentType}");
             string topicMessage = "";
             if (request.ContentType.Contains("form"))
             {
-                foreach (string key in request.Form.Keys)
+                string authKey = request.Form[_myKey];
+                if (string.IsNullOrEmpty(authKey))
                 {
-                    if (string.Equals(key, _myKey))
-                    {
-                        if (string.Equals(request.Form[key], _myKeyValue))
-                        {
-                            _logger.LogInformation($"Successfully authenticated...");
-                            response.StatusCode = StatusCodes.Status200OK;
-                        }
-                        else
-                        {
-                            response.StatusCode = StatusCodes.Status401Unauthorized;
-                        }
-                    }
-                    else
+                    response.StatusCode = StatusCodes.Status401Unauthorized;
+                    topicMessage = "";
+                }
+                else if (!string.Equals(request.Form[_myKey],_myKeyValue))
+                {
+                    response.StatusCode = StatusCodes.Status401Unauthorized;
+                    topicMessage = "";
+                }
+                else
+                {
+                    foreach (string key in request.Form.Keys)
                     {
                         topicMessage += $"key: {key}, value: {request.Form[key]}\n";
                         _logger.LogInformation(topicMessage);
                     }
+                    response.StatusCode = StatusCodes.Status200OK;
                 }
             }
             //_logger.LogInformation("publishing message to topic...");
@@ -59,7 +60,7 @@ namespace RulePubSubProject
             _logger.LogInformation("finishing execution...");
 
             //await context.Response.WriteAsync($"{responseMessage}");
-            await response.CompleteAsync();
+            await response.WriteAsync($"{topicMessage}");
         }
     }
 }
