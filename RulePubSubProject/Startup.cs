@@ -8,7 +8,6 @@ namespace RulePubSubProject
     {
         public override void ConfigureServices(WebHostBuilderContext context, IServiceCollection services)
         {
-            //services.AddHttpClient<IHttpFunction, Function>();
             services.AddTransient<PubSubService>();
         }
     }
