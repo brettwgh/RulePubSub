@@ -68,6 +68,7 @@ namespace RulePubSubProject
             
             _logger.LogInformation("finishing execution...");
 
+            // writes a friendly message back as a response to the requester.
             await response.WriteAsync($"{topicMessage}");
         }
     }
