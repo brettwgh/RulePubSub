@@ -1,7 +1,7 @@
 # Rule Pub/Sub
 
 ## Project Objective ##
-This project was created to show you how to configure a Google Function to receive Rule Exception events from a MyGeotab database instance and then publish them to a Google Pub/Sub topic.
+To indicate how to configure a Google Function to receive Rule Exception events from a MyGeotab database instance and then publish them to a Google Pub/Sub topic.
 
 ### Steps Required ###
 1. Notification Template (Web Template) in the MyGeotab database.
