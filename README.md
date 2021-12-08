@@ -1,6 +1,6 @@
 # Rule Pub/Sub
 
-*Project Objective*
+**Project Objective**
 This project was created to show you how to configure a Google Function to receive Rule Exception events from a MyGeotab database instance and then publish them to a Google Pub/Sub topic.
 
 ## Steps Required ##
