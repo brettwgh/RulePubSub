@@ -26,6 +26,11 @@ namespace RulePubSubProject
             _pubSubService = pubSubService;
         }
 
+        /// <summary>
+        /// The primary entry point for this Google Function.
+        /// </summary>
+        /// <param name="context">Represents the HTTP specific information for this request.</param>
+        /// <returns>An asynchronouse task.</returns>
         public async Task HandleAsync(HttpContext context)
         {
             _logger.LogInformation("starting execution...");
