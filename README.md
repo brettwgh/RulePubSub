@@ -1,7 +1,7 @@
 # Rule Pub/Sub
 
 ## Objective ##
-Indicates how to publish MyGeotab Rule Exception Events to a Google Pub/Sub service instance using a Google function as the intermediary facilitator.
+Indicates how to publish **MyGeotab Rule Exception Events** to a **Google Pub/Sub** service instance using a **Google Function** as the intermediary facilitator.
 
 This repo contains an example C# implementation of how to achieve this objective.
 
