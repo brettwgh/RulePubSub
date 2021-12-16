@@ -1,12 +1,12 @@
 # Rule Pub/Sub
 
 ## Project Objective ##
-To share an example C# project on how to configure a Google Function to receive Rule Exception events from a MyGeotab database instance and then publish these events to a Google Pub/Sub topic which can then be consumed by an interested party.
+Indicates how to publish MyGeotab Rule Exception Events to a Google Pub/Sub service instance using a Google function as the intermediary facilitator.
 
-## Steps Required ##
-This describes the initial steps required (state) to achieve a successful implementation for the above.
-1. Create a Notification Template (Web Template) in the relevant MyGeotab database.
-    1. Define the necessary data you expect to received in the POST Data area of this Web Template.
-2. Create at least one MyGeotab database Rule with the web request set to the template created in the previous step.
-3. Create a Google function like this project, deployed to your Google Cloud Project.
-4. A topic defined in your active Google Pub/Sub structure that matches the path defined in this project's code.
+This repo contains an example C# implementation of how to achieve this objective.
+
+## Prerequisites ##
+Before proceeding the following prerequisites need to be addressed:
+1. A well structured **Notification Template** (**Web Template**) should exist in the relevant MyGeotab database. This template will define the data you expect to receive in the *POST Data* section of the **Web Template**.
+2. A MyGeotab database **Rule** should exist with the **Web Request** selected in the **Notifications** tab of the **Rule**.
+3. A **Topic** defined in a **Google Pub/Sub** service that matches the **_topicName** path variable defined in this project's code.
