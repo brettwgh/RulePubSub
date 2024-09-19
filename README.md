@@ -1,4 +1,6 @@
-# Rule Pub/Sub
+# [DEPRECATED] - Rule Pub/Sub
+
+`The information contained in this repo is deprecated and purely here as a guide. Use at your own discretion/risk!`
 
 ## Objective ##
 Indicates how to publish **MyGeotab Rule Exception Events** to a **Google Pub/Sub** service instance using a **Google Function** as the intermediary facilitator.
